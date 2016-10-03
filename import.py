@@ -2,7 +2,7 @@
 import MySQLdb
 
 src = MySQLdb.connect("aa1mdgyhr3b9jaa.cfzeszoxdqzd.us-west-2.rds.amazonaws.com",
-	"osparcdb","0sparcd6","ebdb")
+	"osparcdb","substitute correct password","ebdb")
 dest = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","osparc")
 
 cursor = src.cursor()
