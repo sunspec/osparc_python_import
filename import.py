@@ -3,12 +3,13 @@ import MySQLdb
 import requests
 import json
 from datetime import datetime
+import time
 
 src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
 dst = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","osparc")
 url = 'http://localhost:8000/api/plants'
 
-plantSql = "select * from Plants where id>0 and id<=1"
+plantSql = "select * from Plants where id>10 and id<=100"
 pvArraySql = "select TrackerType,Tilt,Azimuth from PVArrays where fkPlant=%s"
 
 cursor = src.cursor()
@@ -40,17 +41,14 @@ try:
 		solarAnywhereSite = row[27]
 
 		sql = pvArraySql % (row[0])
-		print sql
-		cursor.execute(sql)
-
-		pvArray = cursor.fetchone()
+		pvaCursor = src.cursor()
+		pvaCursor.execute(sql)
+		pvArray = pvaCursor.fetchone()
 		trackerType = pvArray[0]
 		tilt = pvArray[1]
 		azimuth = pvArray[2]
-		print "tt= %s, tilt=%s, azimuth=%s" % (trackerType,tilt,azimuth)
 
-
-		json = json.dumps(
+		jsonStr = json.dumps(
 			{ "recordStatus":recordStatus,
 			  "versionCreationTime":versionCreationTime.isoformat(),
 			  "versionID":versionID,
@@ -74,9 +72,14 @@ try:
 			  "tilt":tilt,
 			  "azimuth":azimuth
 			},sort_keys=True,indent=4)
-		print json
 
-		response = requests.post(url,headers={"Content-Type":"application/json"},data=json)
+		response = requests.post(url,headers={"Content-Type":"application/json"},data=jsonStr)
+		if response.status_code == 201:
+			print "added %s" % (name)
+		else:
+			print "status: "+response.status_code
+
+		time.sleep(.1)
 except:
 	print "ERROR"
 
