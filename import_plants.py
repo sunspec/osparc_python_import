@@ -6,7 +6,6 @@ from datetime import datetime
 import time
 
 src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
-dst = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","osparc")
 url = 'http://localhost:8000/api/plants'
 
 plantSql = "select * from Plants where id>10 and id<=100"
