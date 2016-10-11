@@ -19,6 +19,7 @@ cursor.execute(plantSql)
 results = cursor.fetchall()
 
 try:
+	print( "results has %d rows" % (len(results)))
 	for row in results:
 		recordStatus = row[2]
 		versionCreationTime = row[3]
@@ -47,6 +48,8 @@ try:
 		trackerType = pvArray[0]
 		tilt = pvArray[1]
 		azimuth = pvArray[2]
+		print "adding %s" % (name)
+
 
 		jsonStr = json.dumps(
 			{ "recordStatus":recordStatus,
@@ -75,7 +78,7 @@ try:
 
 		response = requests.post(url,headers={"Content-Type":"application/json"},data=jsonStr)
 		if response.status_code == 201:
-			print "added %s" % (name)
+			print "added %s (activated %s)" % (name,activationDate.isoformat())
 		else:
 			print "status: "+response.status_code
 
