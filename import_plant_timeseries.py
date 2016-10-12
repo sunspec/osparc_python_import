@@ -8,7 +8,7 @@ import time
 src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
 url = 'http://localhost:8001/api/planttimeseries'
 
-sql = "select a.*,b.HPOA_DIFF as hpoa_diff from PlantTimeSeries a, PVARrayTimeSeries b where a.fkPlant=b.fkPlant and a.Timestamp=b.Timestamp and a.fkPlant>43 and a.fkPlant<=100"
+sql = "select a.*,b.HPOA_DIFF as hpoa_diff from PlantTimeSeries a, PVARrayTimeSeries b where a.fkPlant=b.fkPlant and a.Timestamp=b.Timestamp"
 
 cursor = src.cursor()
 
@@ -37,7 +37,7 @@ try:
 		else:
 			print "status: "+response.status_code
 
-		time.sleep(.05)
+		time.sleep(.01)
 except:
 	print "ERROR"
 

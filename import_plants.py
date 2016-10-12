@@ -6,9 +6,9 @@ from datetime import datetime
 import time
 
 src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
-url = 'http://localhost:8000/api/plants'
+url = 'http://localhost:8001/api/plants'
 
-plantSql = "select * from Plants where id>10 and id<=100"
+plantSql = "select * from Plants"
 pvArraySql = "select TrackerType,Tilt,Azimuth from PVArrays where fkPlant=%s"
 
 cursor = src.cursor()
