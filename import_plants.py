@@ -8,7 +8,7 @@ import time
 src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
 url = 'http://localhost:8001/api/plants'
 
-plantSql = "select * from Plants"
+plantSql = "select * from Plants where id<500"
 pvArraySql = "select TrackerType,Tilt,Azimuth from PVArrays where fkPlant=%s"
 
 cursor = src.cursor()
@@ -81,7 +81,7 @@ try:
 		else:
 			print "status: "+response.status_code
 
-		time.sleep(.1)
+		time.sleep(.01)
 except:
 	print "ERROR"
 
