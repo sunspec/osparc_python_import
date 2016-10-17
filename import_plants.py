@@ -5,15 +5,16 @@ import json
 from datetime import datetime
 import time
 
+num = 1
 src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
 url = 'http://localhost:8001/api/plants'
 
-plantSql = "select * from Plants where id<500"
+plantSql = "select * from Plants where id<=%d"
 pvArraySql = "select TrackerType,Tilt,Azimuth from PVArrays where fkPlant=%s"
 
 cursor = src.cursor()
 
-cursor.execute(plantSql)
+cursor.execute(plantSql % (num))
 
 results = cursor.fetchall()
 
@@ -51,26 +52,26 @@ try:
 
 
 		jsonStr = json.dumps(
-			{ "recordStatus":recordStatus,
-			  "versionCreationTime":versionCreationTime.isoformat(),
-			  "versionID":versionID,
-			  "plantUUID":plantUUID,
-			  "accountID":accountID,
+			{ "recordstatus":recordStatus,
+			  "versioncreationtime":versionCreationTime.isoformat(),
+			  "versionid":versionID,
+			  "plantuuid":plantUUID,
+			  "accountid":accountID,
 			  "name":name,
 			  "description":description,
-			  "activationDate":activationDate.isoformat(),
-			  "postalCode":postalCode,
+			  "activationdate":activationDate.isoformat(),
+			  "postalcode":postalCode,
 			  "state":state,
 			  "county":county,
 			  "city":city,
 			  "latitude":latitude,
 			  "longitude":longitude,
-			  "timeZone":timeZone,
-			  "weatherSource":weatherSource,
-			  "DCRating":DCRating,
+			  "timezone":timeZone,
+			  "weathersource":weatherSource,
+			  "dcrating":DCRating,
 			  "derate":derate,
-			  "solarAnywhereSite":solarAnywhereSite,
-			  "trackerType":trackerType,
+			  "solaranywheresite":solarAnywhereSite,
+			  "trackertype":trackerType,
 			  "tilt":tilt,
 			  "azimuth":azimuth
 			},sort_keys=True,indent=4)

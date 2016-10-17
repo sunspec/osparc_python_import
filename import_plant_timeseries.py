@@ -8,7 +8,7 @@ import time
 src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
 url = 'http://localhost:8001/api/planttimeseries'
 
-sql = "select a.*,b.HPOA_DIFF as hpoa_diff from PlantTimeSeries a, PVARrayTimeSeries b where a.fkPlant=b.fkPlant and a.Timestamp=b.Timestamp and a.fkPlant<500"
+sql = "select a.*,b.HPOA_DIFF as hpoa_diff from PlantTimeSeries a, PVARrayTimeSeries b where a.fkPlant=b.fkPlant and a.Timestamp=b.Timestamp and a.fkPlant<=10"
 
 cursor = src.cursor()
 
