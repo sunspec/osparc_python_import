@@ -5,7 +5,8 @@ import json
 from datetime import datetime
 import time
 
-num = 1
+num = 10
+
 src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
 url = 'http://localhost:8001/api/plants'
 
@@ -20,6 +21,7 @@ results = cursor.fetchall()
 
 try:
 	print( "results has %d rows" % (len(results)))
+
 	for row in results:
 		recordStatus = row[2]
 		versionCreationTime = row[3]
@@ -48,8 +50,6 @@ try:
 		trackerType = pvArray[0]
 		tilt = pvArray[1]
 		azimuth = pvArray[2]
-		print "adding %s" % (name)
-
 
 		jsonStr = json.dumps(
 			{ "recordstatus":recordStatus,
@@ -80,7 +80,7 @@ try:
 		if response.status_code == 201:
 			print "added %s (activated %s)" % (name,activationDate.isoformat())
 		else:
-			print "status: "+response.status_code
+			print "failed to add plant %s. status %s: %s" % (name,response.status_code,response.text)
 
 		time.sleep(.01)
 except:
