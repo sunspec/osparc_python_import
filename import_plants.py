@@ -4,13 +4,16 @@ import requests
 import json
 from datetime import datetime
 import time
+import sys
 
-num = 5500
+num = sys.argv[1]
+
+print ("importing %s plants" %(num))
 
 src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
 url = 'http://localhost:8001/api/plants'
 
-plantSql = "select * from Plants where id<=%d"
+plantSql = "select * from Plants where id<=%s"
 pvArraySql = "select TrackerType,Tilt,Azimuth from PVArrays where fkPlant=%s"
 
 cursor = src.cursor()
@@ -20,7 +23,7 @@ cursor.execute(plantSql % (num))
 results = cursor.fetchall()
 
 try:
-	print( "results has %d rows" % (len(results)))
+	print( "retrieved %d row from ebdb" % (len(results)))
 
 	for row in results:
 		recordStatus = row[2]

@@ -4,8 +4,11 @@ import requests
 import json
 from datetime import datetime
 import time
+import sys
 
-num = 5500
+num = sys.argv[1]
+print ("importing timeseries from %s plants" %(num))
+
 
 src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
 url = 'http://localhost:8001/api/planttimeseries'
@@ -18,7 +21,7 @@ cursor.execute(sql % (num))
 
 results = cursor.fetchall()
 
-print( "results has %d rows" % (len(results)))
+print( "retrieved %d rows from ebdb" % (len(results)))
 
 try:
 	for row in results:
