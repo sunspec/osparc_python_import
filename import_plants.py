@@ -5,7 +5,7 @@ import json
 from datetime import datetime
 import time
 
-num = 10
+num = 5500
 
 src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
 url = 'http://localhost:8001/api/plants'
@@ -82,7 +82,7 @@ try:
 		else:
 			print "failed to add plant %s. status %s: %s" % (name,response.status_code,response.text)
 
-		time.sleep(.01)
+		# time.sleep(.01)
 except:
 	print "ERROR"
 

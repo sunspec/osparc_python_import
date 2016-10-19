@@ -5,7 +5,7 @@ import json
 from datetime import datetime
 import time
 
-num = 10
+num = 5500
 
 src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
 url = 'http://localhost:8001/api/planttimeseries'
