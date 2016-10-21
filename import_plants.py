@@ -58,7 +58,7 @@ try:
 			{ "recordstatus":recordStatus,
 			  "versioncreationtime":versionCreationTime.isoformat(),
 			  "versionid":versionID,
-			  "plantuuid":plantUUID,
+			  "uuid":plantUUID,
 			  "accountid":accountID,
 			  "name":name,
 			  "description":description,
