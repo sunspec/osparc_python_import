@@ -13,7 +13,7 @@ print ("importing timeseries from %s plants" %(num))
 src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
 url = 'http://localhost:8001/api/planttimeseries'
 
-sql = "select a.*,b.HPOA_DIFF as hpoa_diff from PlantTimeSeries a, PVARrayTimeSeries b where a.fkPlant=b.fkPlant and a.Timestamp=b.Timestamp and a.fkPlant<=%s"
+sql = "select a.*,b.HPOA_DIFF as hpoa_diff,c.PlantUUID as uuid from PlantTimeSeries a, PVARrayTimeSeries b, Plants c where a.fkPlant=b.fkPlant and a.fkPlant=c.id and a.Timestamp=b.Timestamp and a.fkPlant<=%s"
 
 cursor = src.cursor()
 
@@ -35,8 +35,11 @@ try:
 			"TMPAMB_AVG": row[9],
 			"HPOA_DIFF": row[45],
 			"plant": row[2],
-			"recordstatus":row[1]
+			"recordstatus":row[1],
+			"plantUUID":row[46]
 		},sort_keys=True,indent=4)
+
+		print jsonStr
 
 		response = requests.post(url,headers={"Content-Type":"application/json"},data=jsonStr)
 		if response.status_code == 201:
