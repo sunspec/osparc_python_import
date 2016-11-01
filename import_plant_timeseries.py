@@ -34,7 +34,6 @@ try:
 			"GHI_DIFF": row[8],
 			"TMPAMB_AVG": row[9],
 			"HPOA_DIFF": row[45],
-			"plant": row[2],
 			"recordstatus":row[1],
 			"plantUUID":row[46]
 		},sort_keys=True,indent=4)
