@@ -50,7 +50,7 @@ try:
 		pvaCursor = src.cursor()
 		pvaCursor.execute(sql)
 		pvArray = pvaCursor.fetchone()
-		trackerType = pvArray[0]
+		arrayType = pvArray[0]
 		tilt = pvArray[1]
 		azimuth = pvArray[2]
 
@@ -74,7 +74,7 @@ try:
 			  "dcrating":DCRating,
 			  "derate":derate,
 			  "solaranywheresite":solarAnywhereSite,
-			  "trackertype":trackerType,
+			  "arraytype":arrayType,
 			  "tilt":tilt,
 			  "azimuth":azimuth
 			},sort_keys=True,indent=4)

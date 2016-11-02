@@ -38,8 +38,6 @@ try:
 			"plantUUID":row[46]
 		},sort_keys=True,indent=4)
 
-		print jsonStr
-
 		response = requests.post(url,headers={"Content-Type":"application/json"},data=jsonStr)
 		if response.status_code == 201:
 			print "added entry plant %s timestamp %s" % (row[2],row[3].isoformat())
