@@ -11,7 +11,7 @@ num = sys.argv[1]
 print ("importing %s plants" %(num))
 
 src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
-url = 'http://localhost:8001/api/plants'
+url = 'http://localhost:8001/api/v1/plants'
 
 plantSql = "select * from Plants where id<=%s"
 pvArraySql = "select TrackerType,Tilt,Azimuth from PVArrays where fkPlant=%s"

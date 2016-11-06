@@ -11,9 +11,9 @@ print ("importing timeseries from %s plants" %(num))
 
 
 src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
-url = 'http://localhost:8001/api/planttimeseries'
+url = 'http://localhost:8001/api/v1/planttimeseries'
 
-sql = "select a.*,b.HPOA_DIFF as hpoa_diff,c.PlantUUID as uuid from PlantTimeSeries a, PVARrayTimeSeries b, Plants c where a.fkPlant=b.fkPlant and a.fkPlant=c.id and a.Timestamp=b.Timestamp and a.fkPlant<=%s"
+sql = "select a.*,b.HPOA_DIFF as hpoa_diff,c.PlantUUID as uuid from PlantTimeSeries a, PVArrayTimeSeries b, Plants c where a.fkPlant=b.fkPlant and a.fkPlant=c.id and a.Timestamp=b.Timestamp and a.fkPlant<=%s"
 
 cursor = src.cursor()
 
