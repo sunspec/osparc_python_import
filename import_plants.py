@@ -6,11 +6,18 @@ from datetime import datetime
 import time
 import sys
 
-num = sys.argv[1]
+try:
+	num = sys.argv[1]
+	host = sys.argv[2]
+	user = sys.argv[3]
+	pwrd = sys.argv[4]
+except:
+	print "usage: python import_plants.py <number of plants> <db host> <db user> <db pw>"
+	quit()
 
-print ("importing %s plants" %(num))
+print "importing %s plants from host %s" %(num,host)
 
-src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
+src = MySQLdb.connect(host,user,pwrd,"ebdb")
 url = 'http://localhost:8001/api/v1/plants'
 
 plantSql = "select * from Plants where id<=%s"

@@ -6,11 +6,18 @@ from datetime import datetime
 import time
 import sys
 
-num = sys.argv[1]
-print ("importing timeseries from %s plants" %(num))
+try:
+	num = sys.argv[1]
+	host = sys.argv[2]
+	user = sys.argv[3]
+	pwrd = sys.argv[4]
+except:
+	print "usage: python import_plants.py <number of plants> <db host> <db user> <db pw>"
+	quit()
 
+print "importing timeseries from %s plants from host %s" %(num,host)
 
-src = MySQLdb.connect("localhost","root","PythonMySQLoSPARC","ebdb")
+src = MySQLdb.connect(host,user,pwrd,"ebdb")
 url = 'http://localhost:8001/api/v1/planttimeseries'
 
 sql = "select a.*,b.HPOA_DIFF as hpoa_diff,c.PlantUUID as uuid from PlantTimeSeries a, PVArrayTimeSeries b, Plants c where a.fkPlant=b.fkPlant and a.fkPlant=c.id and a.Timestamp=b.Timestamp and a.fkPlant<=%s"
